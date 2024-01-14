@@ -41,6 +41,7 @@ import '../../../../infra/constantes.dart';
 
 import '../../../../database/database.dart';
 
+import '../../../../infra/navigate.dart';
 import '../../../shared/view_util_lib.dart';
 import '../../../../infra/atalhos_desktop_web.dart';
 
@@ -129,14 +130,12 @@ class ProdutoFichaTecnicaListaPageState extends State<ProdutoFichaTecnicaListaPa
 
   void _inserir() async {
     ProdutoFichaTecnica? produtoFichaTecnica = ProdutoFichaTecnica(id: null);
-    produtoFichaTecnica = await Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) =>
+    produtoFichaTecnica = await Navigate.to(context,
           ProdutoFichaTecnicaPersistePage(
             produto: widget.produto,
             produtoFichaTecnica: produtoFichaTecnica,
             title: 'Produto Ficha Tecnica - Inserindo',
-            operacao: 'I')));
+            operacao: 'I'));
       if (produtoFichaTecnica != null) { 
         ProdutoController.listaProdutoFichaTecnica.add(produtoFichaTecnica);
       }
@@ -181,14 +180,12 @@ class ProdutoFichaTecnicaListaPageState extends State<ProdutoFichaTecnicaListaPa
   }
 
   void _detalharProdutoFichaTecnica(Produto? produto, ProdutoFichaTecnica produtoFichaTecnica, BuildContext context) {
-        Navigator.of(context)
-          .push(MaterialPageRoute(
-            builder: (BuildContext context) => ProdutoFichaTecnicaPersistePage(
+    Navigate.to(context, ProdutoFichaTecnicaPersistePage(
               produto: produto,
               produtoFichaTecnica: produtoFichaTecnica,
 			  title: "Produto Ficha Tecnica - Editando",
 			  operacao: "A"
-			)))
+			))
           .then((_) {
             setState(() {
               _getRows();

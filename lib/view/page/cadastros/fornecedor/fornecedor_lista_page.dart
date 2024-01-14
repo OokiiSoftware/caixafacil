@@ -318,27 +318,22 @@ class FornecedorListaPageState extends State<FornecedorListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-            FornecedorPersistePage(fornecedor: Fornecedor(id: null, dataCadastro: DateTime.now()), title: 'Fornecedor - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+            FornecedorPersistePage(fornecedor: Fornecedor(id: null, dataCadastro: DateTime.now()), title: 'Fornecedor - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Fornecedor - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Nome',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -484,10 +479,8 @@ class _FornecedorDataSource extends DataTableSource {
 }
 
 void _detalharFornecedor(Fornecedor fornecedor, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => FornecedorPersistePage(
-      fornecedor: fornecedor, title: 'Fornecedor - Editando', operacao: 'A')))
+  Navigate.to(context, FornecedorPersistePage(
+      fornecedor: fornecedor, title: 'Fornecedor - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });
