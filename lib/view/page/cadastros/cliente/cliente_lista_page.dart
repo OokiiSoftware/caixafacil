@@ -346,27 +346,22 @@ class ClienteListaPageState extends State<ClienteListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-            ClientePersistePage(cliente: Cliente(id: null, dataCadastro: DateTime.now()), title: 'Cliente - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+            ClientePersistePage(cliente: Cliente(id: null, dataCadastro: DateTime.now()), title: 'Cliente - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Cliente - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Nome',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -431,11 +426,9 @@ class _ClienteDataSource extends DataTableSource {
             cor: Colors.green.shade400, 
             padding: const EdgeInsets.all(5),
             onPressed: () async {
-              Navigator.of(context)
-                .push(MaterialPageRoute(
-                  builder: (BuildContext context) => ClienteFiadoListaPage(
+              Navigate.to(context, ClienteFiadoListaPage(
                     cliente: cliente, 
-                  )))
+                  ))
                 .then((_) async {    
               });
             }
@@ -540,10 +533,8 @@ class _ClienteDataSource extends DataTableSource {
 }
 
 void _detalharCliente(Cliente cliente, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => ClientePersistePage(
-      cliente: cliente, title: 'Cliente - Editando', operacao: 'A')))
+  Navigate.to(context, ClientePersistePage(
+      cliente: cliente, title: 'Cliente - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

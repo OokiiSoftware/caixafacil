@@ -261,10 +261,7 @@ class ParcelamentoReceitasPageState extends State<ParcelamentoReceitasPage> {
                                                   onPressed: () async {
                                                     ///chamando o lookup
                                                     Map<String, dynamic>? objetoJsonRetorno =
-                                                      await Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (BuildContext context) =>
+                                                      await Navigate.to(context,
                                                           LookupLocalPage(
                                                             title: 'Importar Cliente',
                                                             colunas: ClienteDao.colunas,
@@ -276,7 +273,7 @@ class ParcelamentoReceitasPageState extends State<ParcelamentoReceitasPage> {
                                                             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/clienteLista',); },                                           
                                                           ),
                                                           fullscreenDialog: true,
-                                                        ));
+                                                        );
                                                     if (objetoJsonRetorno != null) {
                                                       if (objetoJsonRetorno['nome'] != null) {
                                                         _importaClienteController.text = objetoJsonRetorno['nome'];

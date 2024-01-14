@@ -205,9 +205,7 @@ class CardapioPageState extends State<CardapioPage> {
       onTap: () async {
         ProdutoController.listaProdutoImagem = await Sessao.db.produtoImagemDao.consultarListaFiltro('ID_PRODUTO', listaProdutoMontado[index].produto!.id.toString());
         if (!mounted) return;
-        Navigator.push(
-          context, MaterialPageRoute(builder: (_) => CardapioDetalhePage(listaProdutoMontado[index]))
-        ).then((value) { });
+        Navigate.to(context, CardapioDetalhePage(listaProdutoMontado[index]));
       },
       splashColor: Colors.black,
       child: Card(

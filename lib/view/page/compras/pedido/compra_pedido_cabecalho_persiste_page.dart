@@ -199,10 +199,7 @@ class CompraPedidoCabecalhoPersistePageState extends State<CompraPedidoCabecalho
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) =>
+                                    await Navigate.to(context,
                                               LookupLocalPage(
                                                 title: 'Importar Colaborador',
                                                 colunas: ColaboradorDao.colunas,
@@ -214,7 +211,7 @@ class CompraPedidoCabecalhoPersistePageState extends State<CompraPedidoCabecalho
                                                 metodoCadastroCallBack: () { Navigator.pushNamed(context, '/colaboradorLista',); },
                                               ),
                                           fullscreenDialog: true,
-                                        ));
+                                        );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['nome'] != null) {
                                         importaColaboradorController.text = objetoJsonRetorno['nome'];
@@ -271,10 +268,7 @@ class CompraPedidoCabecalhoPersistePageState extends State<CompraPedidoCabecalho
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) =>
+                                    await Navigate.to(context,
                                               LookupLocalPage(
                                                 title: 'Importar Fornecedor',
                                                 colunas: FornecedorDao.colunas,
@@ -286,7 +280,7 @@ class CompraPedidoCabecalhoPersistePageState extends State<CompraPedidoCabecalho
                                                 metodoCadastroCallBack: () { Navigator.pushNamed(context, '/fornecedorLista',); },
                                               ),
                                           fullscreenDialog: true,
-                                        ));
+                                        );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['nome'] != null) {
                                         paginaMestreDetalheFoiAlterada = true;

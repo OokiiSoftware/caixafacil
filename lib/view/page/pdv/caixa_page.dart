@@ -260,9 +260,7 @@ class _State extends State<CaixaPage> {
       ListTile(
         minLeadingWidth: Biblioteca.isTelaPequena(context)! ? 0 : 20,
         onTap: () {
-          Navigator.of(context)
-            .push(MaterialPageRoute(
-                builder: (BuildContext context) => ProdutoDetalhePage(title: 'Detalhe do Produto', item: Sessao.listaVendaAtualDetalhe[index])))
+          Navigate.to(context, ProdutoDetalhePage(title: 'Detalhe do Produto', item: Sessao.listaVendaAtualDetalhe[index]))
             .then((_) {
               if (Sessao.listaVendaAtualDetalhe[index].pdvVendaDetalhe!.quantidade! <= 0) {
                 _excluirProduto(index: index, perguntaAntes: false);
@@ -625,8 +623,7 @@ class _State extends State<CaixaPage> {
     if (Sessao.statusCaixa == StatusCaixa.vendaEmAndamento) {
       if (Sessao.listaVendaAtualDetalhe.isNotEmpty) {
         _emitindoNota = true;
-        bool? encerrouVenda = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => const EfetuaPagamentoPage(title: 'Encerramento da Venda')));
+        bool? encerrouVenda = await Navigate.to(context, const EfetuaPagamentoPage(title: 'Encerramento da Venda'));
           if (encerrouVenda ?? false) {
             Sessao.vendaAtual = 
             Sessao.vendaAtual!.copyWith(
@@ -775,11 +772,8 @@ class _State extends State<CaixaPage> {
 
   void _imprimirDanfe(Uint8List danfe) {
     Sessao.fecharDialogBoxEspera(context);
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => PdfPage(
-          arquivoPdf: danfe, title: 'NFC-e')
-        )
+    Navigate.to(context, PdfPage(
+        arquivoPdf: danfe, title: 'NFC-e')
       ).then(
         (value) {
           _configurarDadosTelaPadrao();
@@ -789,11 +783,8 @@ class _State extends State<CaixaPage> {
 
   void _imprimirCupomSat(Uint8List cupom) {
     Sessao.fecharDialogBoxEspera(context);
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => PdfPage(
-          arquivoPdf: cupom, title: 'Cfe-Sat')
-        )
+    Navigate.to(context, PdfPage(
+        arquivoPdf: cupom, title: 'Cfe-Sat')
       ).then(
         (value) {
           _configurarDadosTelaPadrao();
@@ -822,10 +813,7 @@ class _State extends State<CaixaPage> {
     if (Sessao.statusCaixa == StatusCaixa.vendaEmAndamento) {
       _exibirMensagemExisteVendaEmAndamento();
     } else {
-      Map<String, dynamic>? objetoJsonRetorno = await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => LookupLocalPage(
+      Map<String, dynamic>? objetoJsonRetorno = await Navigate.to(context, LookupLocalPage(
               title: 'Reimprimir Recibo de Venda',
               colunas: PdvVendaCabecalhoDao.colunas,
               campos: PdvVendaCabecalhoDao.campos,
@@ -834,7 +822,7 @@ class _State extends State<CaixaPage> {
               metodoConsultaCallBack: _filtrarVendaFechadaLookup,
             ),
             fullscreenDialog: true,
-          ));
+          );
       if (objetoJsonRetorno != null) {
         Sessao.vendaAtual = await Sessao.db.pdvVendaCabecalhoDao.consultarObjeto(objetoJsonRetorno['id']);
         Sessao.listaVendaAtualDetalhe = await Sessao.db.pdvVendaDetalheDao.consultarListaComProduto(objetoJsonRetorno['id']);
@@ -847,10 +835,7 @@ class _State extends State<CaixaPage> {
     if (Sessao.statusCaixa == StatusCaixa.vendaEmAndamento) {
       _exibirMensagemExisteVendaEmAndamento();
     } else {
-      Map<String, dynamic>? objetoJsonRetorno = await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => LookupLocalPage(
+      Map<String, dynamic>? objetoJsonRetorno = await Navigate.to(context, LookupLocalPage(
               title: 'Recuperar Venda',
               colunas: PdvVendaCabecalhoDao.colunas,
               campos: PdvVendaCabecalhoDao.campos,
@@ -859,7 +844,7 @@ class _State extends State<CaixaPage> {
               metodoConsultaCallBack: _filtrarVendaLookup,
             ),
             fullscreenDialog: true,
-          ));
+          );
       if (objetoJsonRetorno != null) {
         Sessao.vendaAtual = await Sessao.db.pdvVendaCabecalhoDao.consultarObjeto(objetoJsonRetorno['id']);
         Sessao.listaVendaAtualDetalhe = await Sessao.db.pdvVendaDetalheDao.consultarListaComProduto(objetoJsonRetorno['id']);
@@ -895,9 +880,7 @@ class _State extends State<CaixaPage> {
         gerarDialogBoxInformacao(context, 'Não é possível fornecer desconto nos itens e no total da venda.');
       } else {
         if (Sessao.listaVendaAtualDetalhe.isNotEmpty) {
-          Navigator.of(context)
-            .push(MaterialPageRoute(
-                builder: (BuildContext context) => const InformaValorPage(title: 'Desconto na Venda', operacao: 'DESCONTO', )))
+          Navigate.to(context, const InformaValorPage(title: 'Desconto na Venda', operacao: 'DESCONTO', ))
             .then((_) {
               setState(() {
                 _atualizarTotais();
@@ -1173,10 +1156,7 @@ class _State extends State<CaixaPage> {
 
   void _identificarVendedor() async {  
     if (Sessao.statusCaixa == StatusCaixa.vendaEmAndamento) {
-      Map<String, dynamic>? objetoJsonRetorno = await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => LookupLocalPage(
+      Map<String, dynamic>? objetoJsonRetorno = await Navigate.to(context, LookupLocalPage(
               title: 'Importar Vendedor',
               colunas: ColaboradorDao.colunas,
               campos: ColaboradorDao.campos,
@@ -1185,7 +1165,7 @@ class _State extends State<CaixaPage> {
               metodoConsultaCallBack: _filtrarVendedorLookup,
             ),
             fullscreenDialog: true,
-          ));
+          );
       if (objetoJsonRetorno != null) {
         setState(() {
           Sessao.vendaAtual = 
@@ -1207,9 +1187,7 @@ class _State extends State<CaixaPage> {
 
   void _identificarCliente() async {
     if (Sessao.statusCaixa == StatusCaixa.vendaEmAndamento) {
-      Navigator.of(context)
-        .push(MaterialPageRoute(
-            builder: (BuildContext context) => const IdentificaClientePage(title: 'Identifica Cliente')))
+      Navigate.to(context, const IdentificaClientePage(title: 'Identifica Cliente'))
         .then((_) {
           setState(() {
           });
@@ -1221,10 +1199,7 @@ class _State extends State<CaixaPage> {
   }
 
   void _importarProduto({String? criterioPesquisa}) async {
-    Map<String, dynamic>? objetoJsonRetorno = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => LookupLocalPage(
+    Map<String, dynamic>? objetoJsonRetorno = await Navigate.to(context, LookupLocalPage(
             title: 'Importar Produto',
             colunas: ProdutoDao.colunas,
             campos: ProdutoDao.campos,
@@ -1235,7 +1210,7 @@ class _State extends State<CaixaPage> {
             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/produtoLista',); },
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (objetoJsonRetorno != null) {
       _localizarProduto(objetoJsonRetorno['gtin']);
     }    
@@ -1286,9 +1261,7 @@ class _State extends State<CaixaPage> {
         gerarDialogBoxConfirmacao(context, 
           'Existem ${notasEmContingencia.length} notas impressas em contingência. Deseja transmiti-las agora?', 
           () {
-            Navigator.of(context)
-              .push(MaterialPageRoute(
-                builder: (BuildContext context) => const NfeCabecalhoListaPage()))
+            Navigate.to(context, const NfeCabecalhoListaPage())
               .then((_) {
               });            
           },
@@ -1330,10 +1303,8 @@ class _State extends State<CaixaPage> {
             await Sessao.db.pdvConfiguracaoDao.alterar(Sessao.configuracaoPdv!);                 
             Sessao.db.nfcePlanoPagamentoDao.excluir(Sessao.nfcePlanoPagamento!);
             if (!mounted) return;
-            Navigator.of(context)
-              .push(MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      const NfceContrataPage()))
+            Navigate.to(context,
+                      const NfceContrataPage())
               .then((_) {
               });       
           }  

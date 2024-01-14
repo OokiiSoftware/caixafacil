@@ -197,27 +197,26 @@ class TributGrupoTributarioListaPageState extends State<TributGrupoTributarioLis
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-            TributGrupoTributarioPersistePage(tributGrupoTributario: TributGrupoTributario(id: null,), title: 'Grupo Tributario - Inserindo', operacao: 'I')))
-      .then((_) async {
-        await _refrescarTela();
+    Navigate.to(context,
+      TributGrupoTributarioPersistePage(
+        tributGrupoTributario: TributGrupoTributario(id: null,),
+        title: 'Grupo Tributario - Inserindo',
+        operacao: 'I',
+      ),
+    ).then((_) async {
+      await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Grupo Tributario - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Descrição',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -301,11 +300,11 @@ class _TributGrupoTributarioDataSource extends DataTableSource {
 }
 
 void _detalharTributGrupoTributario(TributGrupoTributario tributGrupoTributario, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => TributGrupoTributarioPersistePage(
-      tributGrupoTributario: tributGrupoTributario, title: 'Grupo Tributario - Editando', operacao: 'A')))
-    .then((_) async {    
+  Navigate.to(context, TributGrupoTributarioPersistePage(
+      tributGrupoTributario: tributGrupoTributario,
+    title: 'Grupo Tributario - Editando',
+    operacao: 'A',
+  )).then((_) async {
       await refrescarTela();
    });
 }

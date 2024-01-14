@@ -269,17 +269,14 @@ class EstoqueListaPageState extends State<EstoqueListaPage> {
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Produto - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Nome',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -335,9 +332,7 @@ class EstoqueListaPageState extends State<EstoqueListaPage> {
       // faz o pedido
       CompraPedidoCabecalhoListaPage.compraPedidoCabecalho = compraPedidoCabecalho;
       CompraPedidoCabecalhoListaPage.listaCompraDetalhe = listaCompraDetalhe;
-      Navigator.of(context)
-        .push(MaterialPageRoute(
-          builder: (BuildContext context) => const CompraPedidoCabecalhoListaPage()))
+      Navigate.to(context, const CompraPedidoCabecalhoListaPage())
         .then((_) async {    
           await _refrescarTela();
       });

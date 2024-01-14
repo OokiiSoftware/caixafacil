@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 export 'biblioteca.dart';
 export 'constantes.dart';
+export 'navigate.dart';
 export 'rotas.dart';
 export 'sessao.dart';
 export 'valida_campo_formulario.dart';

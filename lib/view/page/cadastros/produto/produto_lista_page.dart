@@ -313,9 +313,7 @@ class ProdutoListaPageState extends State<ProdutoListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
+    Navigate.to(context,
             ProdutoPage(
               produtoMontado: ProdutoMontado(
                 produto: Produto(id: null, situacao: 'A'), 
@@ -326,24 +324,21 @@ class ProdutoListaPageState extends State<ProdutoListaPage> {
                 produtoSubgrupo: ProdutoSubgrupo(id: null),
               ), 
               title: 'Produto - Inserindo', operacao: 'I')
-            ))
+            )
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Produto - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Nome',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -509,10 +504,8 @@ void _detalharProduto(ProdutoMontado produtoMontado, BuildContext context, Funct
   produtoMontado.cardapio ??= Cardapio(id: null); // se cardapio for nulo, instancia
   produtoMontado.produtoSubgrupo ??= ProdutoSubgrupo(id: null); // se produtoSubgrupo for nulo, instancia
 
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => ProdutoPage(
-      produtoMontado: produtoMontado, title: 'Produto - Editando', operacao: 'A')))
+  Navigate.to(context,ProdutoPage(
+      produtoMontado: produtoMontado, title: 'Produto - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

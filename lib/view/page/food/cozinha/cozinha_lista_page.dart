@@ -197,26 +197,21 @@ class CozinhaListaPageState extends State<CozinhaListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-          CozinhaPersistePage(cozinha: Cozinha(id: null,), title: 'Cozinha - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+          CozinhaPersistePage(cozinha: Cozinha(id: null,), title: 'Cozinha - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Cozinha - Filtro',
             colunas: _colunas,
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -300,10 +295,8 @@ class _CozinhaDataSource extends DataTableSource {
 }
 
 void _detalharCozinha(Cozinha cozinha, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => CozinhaPersistePage(
-      cozinha: cozinha, title: 'Cozinha - Editando', operacao: 'A')))
+  Navigate.to(context, CozinhaPersistePage(
+      cozinha: cozinha, title: 'Cozinha - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

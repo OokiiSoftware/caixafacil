@@ -41,7 +41,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../infra/infra.dart';
 
 import '../shared/custom_background.dart';
-import '../shared/profile_tile.dart';
+import '../shared/menu_action_grupo.dart';
+import '../shared/menu_all_cards.dart';
+import '../shared/menu_appbar_column.dart';
 
 import 'menu_interno_botoes.dart';
 import 'menu_titulo_grupo_menu_interno.dart';
@@ -63,76 +65,70 @@ class MenuFiscal extends StatelessWidget {
           CustomBackground(
             showIcon: false,
           ),
-          allCards(context),
+          AllCards(
+            children: <Widget>[
+              const AppBarColumn(),
+              const SizedBox(height: 10,),
+              Sessao.configuracaoPdv!.moduloFiscalPrincipal == 'NFC' ? actionMenuGrupoNfce() : const SizedBox(height: 1,),
+              Sessao.configuracaoPdv!.moduloFiscalPrincipal == 'NFC' ? const SizedBox(height: 20,) : const SizedBox(height: 1,),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget allCards(BuildContext context) => SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            appBarColumn(context),
-            const SizedBox(height: 10,),
-            Sessao.configuracaoPdv!.moduloFiscalPrincipal == 'NFC' ? actionMenuGrupoNfce() : const SizedBox(height: 1,), 
-            Sessao.configuracaoPdv!.moduloFiscalPrincipal == 'NFC' ? const SizedBox(height: 20,) : const SizedBox(height: 1,),
-          ],
-        ),
-      );
+  // Widget allCards(BuildContext context) => SingleChildScrollView(
+  //       child: Column(
+  //         children: <Widget>[
+  //           appBarColumn(context),
+  //           const SizedBox(height: 10,),
+  //           Sessao.configuracaoPdv!.moduloFiscalPrincipal == 'NFC' ? actionMenuGrupoNfce() : const SizedBox(height: 1,),
+  //           Sessao.configuracaoPdv!.moduloFiscalPrincipal == 'NFC' ? const SizedBox(height: 20,) : const SizedBox(height: 1,),
+  //         ],
+  //       ),
+  //     );
+  //
+  // Widget appBarColumn(BuildContext context) => const SafeArea(
+  //       child: Padding(
+  //         padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 18.0),
+  //         child: Column(
+  //           children: <Widget>[
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: <Widget>[
+  //                 ProfileTile(
+  //                   title: Constantes.nomeApp,
+  //                   subtitle: "Módulo Fiscal",
+  //                   textColor: Colors.white,
+  //                 ),
+  //               ],
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     );
 
-  Widget appBarColumn(BuildContext context) => const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 18.0),
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ProfileTile(
-                    title: Constantes.nomeApp,
-                    subtitle: "Módulo Fiscal",
-                    textColor: Colors.white,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-
-  Widget actionMenuGrupoNfce() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Card(
-          elevation: 2.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const MenuTituloGrupoMenuInterno(titulo: "Grupo NFC-e"),
-                  MenuInternoBotoes(
-                    primeiroBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.stackOverflow,
-                        label: "Contingenciadas",
-                        circleColor: Colors.red,
-                        rota: "/nfceContingenciadas"),
-                    segundoBotao: BotaoMenu(
-                        // ignore: deprecated_member_use
-                        icon: FontAwesomeIcons.sortNumericDown,
-                        label: "Inutilizar Número",
-                        circleColor: Colors.blue,
-                        rota: "/nfceInutilizaNumero"),
-                    terceiroBotao: null,
-                    quartoBotao: null,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
+  Widget actionMenuGrupoNfce() => ActionMenuGrupo(
+    children: <Widget>[
+      const MenuTituloGrupoMenuInterno(titulo: "Grupo NFC-e"),
+      MenuInternoBotoes(
+        primeiroBotao: BotaoMenu(
+            icon: FontAwesomeIcons.stackOverflow,
+            label: "Contingenciadas",
+            circleColor: Colors.red,
+            rota: "/nfceContingenciadas"),
+        segundoBotao: BotaoMenu(
+          // ignore: deprecated_member_use
+            icon: FontAwesomeIcons.sortNumericDown,
+            label: "Inutilizar Número",
+            circleColor: Colors.blue,
+            rota: "/nfceInutilizaNumero"),
+        terceiroBotao: null,
+        quartoBotao: null,
+      ),
+    ],
+  );
 
 
 

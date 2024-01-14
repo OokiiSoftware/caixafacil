@@ -191,27 +191,22 @@ class TributOperacaoFiscalListaPageState extends State<TributOperacaoFiscalLista
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-          TributOperacaoFiscalPersistePage(tributOperacaoFiscal: TributOperacaoFiscal(id: null,), title: 'Operação Fiscal - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+          TributOperacaoFiscalPersistePage(tributOperacaoFiscal: TributOperacaoFiscal(id: null,), title: 'Operação Fiscal - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Operação Fiscal - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Descrição',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -292,10 +287,8 @@ class _TributOperacaoFiscalDataSource extends DataTableSource {
 }
 
 void _detalharTributOperacaoFiscal(TributOperacaoFiscal tributOperacaoFiscal, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => TributOperacaoFiscalPersistePage(
-      tributOperacaoFiscal: tributOperacaoFiscal, title: 'Operação Fiscal - Editando', operacao: 'A')))
+  Navigate.to(context, TributOperacaoFiscalPersistePage(
+      tributOperacaoFiscal: tributOperacaoFiscal, title: 'Operação Fiscal - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

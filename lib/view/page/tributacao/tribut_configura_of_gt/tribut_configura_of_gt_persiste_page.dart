@@ -162,20 +162,17 @@ class TributConfiguraOfGtPersistePageState extends State<TributConfiguraOfGtPers
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              LookupLocalPage(
-                                                title: 'Importar Grupo Tributário',
-                                                colunas: TributGrupoTributarioDao.colunas,
-                                                campos: TributGrupoTributarioDao.campos,
-                                                campoPesquisaPadrao: 'descricao',
-                                                valorPesquisaPadrao: '%',
-                                                metodoConsultaCallBack: _filtrarGrupoTributarioLookup,
-                                              ),
-                                          fullscreenDialog: true,
-                                        ));
+                                    await Navigate.to(context,
+                                      LookupLocalPage(
+                                        title: 'Importar Grupo Tributário',
+                                        colunas: TributGrupoTributarioDao.colunas,
+                                        campos: TributGrupoTributarioDao.campos,
+                                        campoPesquisaPadrao: 'descricao',
+                                        valorPesquisaPadrao: '%',
+                                        metodoConsultaCallBack: _filtrarGrupoTributarioLookup,
+                                      ),
+                                      fullscreenDialog: true,
+                                    );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['descricao'] != null) {
                                         importaTributGrupoTributarioController.text = objetoJsonRetorno['descricao'];
@@ -232,20 +229,17 @@ class TributConfiguraOfGtPersistePageState extends State<TributConfiguraOfGtPers
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              LookupLocalPage(
-                                                title: 'Importar Operação Fiscal',
-                                                colunas: TributOperacaoFiscalDao.colunas,
-                                                campos: TributOperacaoFiscalDao.campos,
-                                                campoPesquisaPadrao: 'descricao',
-                                                valorPesquisaPadrao: '%',
-                                                metodoConsultaCallBack: TributOperacaoFiscalController.filtrarOperacaoFiscalLookup,
-                                              ),
+                                    await Navigate.to(context,
+                                      LookupLocalPage(
+                                        title: 'Importar Operação Fiscal',
+                                        colunas: TributOperacaoFiscalDao.colunas,
+                                        campos: TributOperacaoFiscalDao.campos,
+                                        campoPesquisaPadrao: 'descricao',
+                                        valorPesquisaPadrao: '%',
+                                        metodoConsultaCallBack: TributOperacaoFiscalController.filtrarOperacaoFiscalLookup,
+                                      ),
                                           fullscreenDialog: true,
-                                        ));
+                                        );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['descricao'] != null) {
                                         importaTributOperacaoFiscalController.text = objetoJsonRetorno['descricao'];

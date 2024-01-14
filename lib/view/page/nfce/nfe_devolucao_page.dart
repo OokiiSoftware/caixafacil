@@ -230,11 +230,8 @@ class NfeDevolucaoPageState extends State<NfeDevolucaoPage> with SingleTickerPro
 
   void _imprimirDanfe(Uint8List danfe) {
     Sessao.fecharDialogBoxEspera(context);
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => PdfPage(
-          arquivoPdf: danfe, title: 'NF-e Devolução Mercadoria')
-        )
+    Navigate.to(context, PdfPage(
+        arquivoPdf: danfe, title: 'NF-e Devolução Mercadoria')
       ).then(
         (value) {
           Navigator.pop(context);

@@ -739,10 +739,7 @@ class ComandaDetalhePageState extends State<ComandaDetalhePage> {
   }
 
   void _importarProduto({String? criterioPesquisa}) async {
-    Map<String, dynamic>? objetoJsonRetorno = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => LookupLocalPage(
+    Map<String, dynamic>? objetoJsonRetorno = await Navigate.to(context, LookupLocalPage(
             title: 'Importar Produto',
             colunas: ProdutoDao.colunas,
             campos: ProdutoDao.campos,
@@ -753,7 +750,7 @@ class ComandaDetalhePageState extends State<ComandaDetalhePage> {
             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/produtoLista',); },
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (objetoJsonRetorno != null) {
       _localizarProduto(objetoJsonRetorno['gtin']);
     }    
@@ -854,12 +851,9 @@ class ComandaDetalhePageState extends State<ComandaDetalhePage> {
   }
 
   Future _tratarPerguntas(ComandaDetalheMontado comandaDetalheMontado) async {
-    List<RespostasSelecionadas> listaRespostasSelecionadas = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (BuildContext context) => ComandaCardapioPerguntaLookupPage(comandaDetalheMontado.produtoMontado!.cardapio!),
-        fullscreenDialog: true,
-      )
+    List<RespostasSelecionadas> listaRespostasSelecionadas = await Navigate.to(context,
+      ComandaCardapioPerguntaLookupPage(comandaDetalheMontado.produtoMontado!.cardapio!),
+      fullscreenDialog: true,
     );        
 
     var perguntaResposta = '';
@@ -888,12 +882,8 @@ class ComandaDetalhePageState extends State<ComandaDetalhePage> {
     if (operacao == 'excluir') {
       _excluirProduto(index: index, perguntaAntes: true);
     } else if (operacao == 'observacao') {
-      final retorno = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => const ComandaObservacaoPadraoLookupPage(),
+      final retorno = await Navigate.to(context, const ComandaObservacaoPadraoLookupPage(),
           fullscreenDialog: true,
-        )
       );
       if (retorno is List<dynamic>) {
         var observacao = '';
@@ -918,10 +908,7 @@ class ComandaDetalhePageState extends State<ComandaDetalhePage> {
       }
     } else if (operacao == 'complemento') {
       Map<String, dynamic>? objetoJsonRetorno =
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) =>
+        await Navigate.to(context,
             LookupLocalPage(
               title: 'Importar Complemento',
               colunas: ProdutoDao.colunas,
@@ -932,7 +919,6 @@ class ComandaDetalhePageState extends State<ComandaDetalhePage> {
               permiteCadastro: false,
             ),
             fullscreenDialog: true,
-          )
         );
       if (objetoJsonRetorno != null) {
 
@@ -991,12 +977,8 @@ class ComandaDetalhePageState extends State<ComandaDetalhePage> {
       if (!mounted) return;
       Navigator.pop(context);
     } else if (operacao == 'desconto') {
-      final retorno = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => const InformaValorPage(title: 'Desconto na Comanda', operacao: 'DESCONTO_COMANDA', ),
+      final retorno = await Navigate.to(context, const InformaValorPage(title: 'Desconto na Comanda', operacao: 'DESCONTO_COMANDA', ),
           fullscreenDialog: true,
-        )
       ); 
       if (retorno != false) {
         valorDesconto = Biblioteca.calcularDesconto(widget.comandaMontado.comanda!.valorSubtotal!, retorno);

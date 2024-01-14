@@ -191,26 +191,21 @@ class ProdutoGrupoListaPageState extends State<ProdutoGrupoListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-          ProdutoGrupoPersistePage(produtoGrupo: ProdutoGrupo(id: null,), title: 'Produto Grupo - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+          ProdutoGrupoPersistePage(produtoGrupo: ProdutoGrupo(id: null,), title: 'Produto Grupo - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Produto Grupo - Filtro',
             colunas: _colunas,
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -291,10 +286,8 @@ class _ProdutoGrupoDataSource extends DataTableSource {
 }
 
 void _detalharProdutoGrupo(ProdutoGrupo produtoGrupo, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => ProdutoGrupoPersistePage(
-      produtoGrupo: produtoGrupo, title: 'ProdutoGrupo - Editando', operacao: 'A')))
+  Navigate.to(context, ProdutoGrupoPersistePage(
+      produtoGrupo: produtoGrupo, title: 'ProdutoGrupo - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

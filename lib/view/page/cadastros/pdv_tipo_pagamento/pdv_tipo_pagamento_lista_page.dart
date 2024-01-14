@@ -218,27 +218,22 @@ class PdvTipoPagamentoListaPageState extends State<PdvTipoPagamentoListaPage> {
     return colunas;
   }
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-            PdvTipoPagamentoPersistePage(pdvTipoPagamento: PdvTipoPagamento(id: null,), title: 'PdvTipoPagamento - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+            PdvTipoPagamentoPersistePage(pdvTipoPagamento: PdvTipoPagamento(id: null,), title: 'PdvTipoPagamento - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'PdvTipoPagamento - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Codigo',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -345,10 +340,8 @@ class _PdvTipoPagamentoDataSource extends DataTableSource {
 
 void _detalharPdvTipoPagamento(PdvTipoPagamento pdvTipoPagamento, BuildContext context, Function refrescarTela) {
   if (pdvTipoPagamento.id != 1 && pdvTipoPagamento.codigo != '99') {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => PdvTipoPagamentoPersistePage(
-        pdvTipoPagamento: pdvTipoPagamento, title: 'Tipo Pagamento - Editando', operacao: 'A')))
+    Navigate.to(context, PdvTipoPagamentoPersistePage(
+        pdvTipoPagamento: pdvTipoPagamento, title: 'Tipo Pagamento - Editando', operacao: 'A'))
       .then((_) async {    
         await refrescarTela();
     });

@@ -41,7 +41,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../infra/infra.dart';
 
 import '../shared/custom_background.dart';
-import '../shared/profile_tile.dart';
+import '../shared/menu_action_grupo.dart';
+import '../shared/menu_all_cards.dart';
+import '../shared/menu_appbar_column.dart';
 
 import 'menu_interno_botoes.dart';
 import 'menu_titulo_grupo_menu_interno.dart';
@@ -63,220 +65,180 @@ class MenuCadastros extends StatelessWidget {
           CustomBackground(
             showIcon: false,
           ),
-          allCards(context),
+          AllCards(
+            children: <Widget>[
+              const AppBarColumn(),
+              // const SizedBox(height: 10,),
+              actionMenuGrupoPessoa(),
+              // const SizedBox(height: 10,),
+              actionMenuGrupoProduto(),
+              // const SizedBox(height: 10,),
+              actionMenuGrupoGeral(),
+              // const SizedBox(height: 10,),
+              // só apresenta o cadastro da tributação se não for o módulo gratuito
+              Sessao.configuracaoPdv!.modulo == 'G' ? const SizedBox(height: 1,) : actionMenuGrupoTributacao(),
+              Sessao.configuracaoPdv!.modulo == 'G' ? const SizedBox(height: 1,) : const SizedBox(height: 20,),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget allCards(BuildContext context) => SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            appBarColumn(context),
-            const SizedBox(height: 10,),
-            actionMenuGrupoPessoa(),
-            const SizedBox(height: 10,),
-            actionMenuGrupoProduto(),
-            const SizedBox(height: 10,),
-            actionMenuGrupoGeral(),
-            const SizedBox(height: 10,),
-            // só apresenta o cadastro da tributação se não for o módulo gratuito
-            Sessao.configuracaoPdv!.modulo == 'G' ? const SizedBox(height: 1,) : actionMenuGrupoTributacao(), 
-            Sessao.configuracaoPdv!.modulo == 'G' ? const SizedBox(height: 1,) : const SizedBox(height: 20,),
-          ],
-        ),
-      );
+  // Widget allCards(BuildContext context) => SingleChildScrollView(
+  //       child: Column(
+  //         children: <Widget>[
+  //           appBarColumn(context),
+  //           const SizedBox(height: 10,),
+  //           actionMenuGrupoPessoa(),
+  //           const SizedBox(height: 10,),
+  //           actionMenuGrupoProduto(),
+  //           const SizedBox(height: 10,),
+  //           actionMenuGrupoGeral(),
+  //           const SizedBox(height: 10,),
+  //           // só apresenta o cadastro da tributação se não for o módulo gratuito
+  //           Sessao.configuracaoPdv!.modulo == 'G' ? const SizedBox(height: 1,) : actionMenuGrupoTributacao(),
+  //           Sessao.configuracaoPdv!.modulo == 'G' ? const SizedBox(height: 1,) : const SizedBox(height: 20,),
+  //         ],
+  //       ),
+  //     );
+  //
+  // Widget appBarColumn(BuildContext context) => const SafeArea(
+  //       child: Padding(
+  //         padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 18.0),
+  //         child: Column(
+  //           children: <Widget>[
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: <Widget>[
+  //                 ProfileTile(
+  //                   title: Constantes.nomeApp,
+  //                   subtitle: "Módulo Cadastros",
+  //                   textColor: Colors.white,
+  //                 ),
+  //               ],
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     );
 
-  Widget appBarColumn(BuildContext context) => const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 18.0),
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ProfileTile(
-                    title: Constantes.nomeApp,
-                    subtitle: "Módulo Cadastros",
-                    textColor: Colors.white,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
+  Widget actionMenuGrupoPessoa() => ActionMenuGrupo(
+    children: <Widget>[
+      const MenuTituloGrupoMenuInterno(titulo: "Grupo Pessoa"),
+      MenuInternoBotoes(
+        primeiroBotao: BotaoMenu(
+            icon: FontAwesomeIcons.addressCard,
+            label: "Cliente",
+            circleColor: Colors.orange,
+            rota: "/clienteLista"),
+        segundoBotao: BotaoMenu(
+          // ignore: deprecated_member_use
+            icon: FontAwesomeIcons.truckLoading,
+            label: "Fornecedor",
+            circleColor: Colors.teal,
+            rota: "/fornecedorLista"),
+        terceiroBotao: BotaoMenu(
+            icon: FontAwesomeIcons.idBadge,
+            label: "Colaborador",
+            circleColor: Colors.purple,
+            rota: "/colaboradorLista"),
+        quartoBotao: null,
+      ),
+    ],
+  );
 
-  Widget actionMenuGrupoPessoa() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Card(
-          elevation: 2.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const MenuTituloGrupoMenuInterno(titulo: "Grupo Pessoa"),
-                  MenuInternoBotoes(
-                    primeiroBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.addressCard,
-                        label: "Cliente",
-                        circleColor: Colors.orange,
-                        rota: "/clienteLista"),
-                    segundoBotao: BotaoMenu(
-                        // ignore: deprecated_member_use
-                        icon: FontAwesomeIcons.truckLoading,
-                        label: "Fornecedor",
-                        circleColor: Colors.teal,
-                        rota: "/fornecedorLista"),
-                    terceiroBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.idBadge,
-                        label: "Colaborador",
-                        circleColor: Colors.purple,
-                        rota: "/colaboradorLista"),
-                    quartoBotao: null,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
+  Widget actionMenuGrupoProduto() => ActionMenuGrupo(
+    children: <Widget>[
+      const MenuTituloGrupoMenuInterno(titulo: "Grupo Produto"),
+      MenuInternoBotoes(
+        primeiroBotao: BotaoMenu(
+          // ignore: deprecated_member_use
+            icon: FontAwesomeIcons.archive,
+            label: "Tipo Produto",
+            circleColor: Colors.indigo,
+            rota: "/produtoTipoLista"),
+        segundoBotao: BotaoMenu(
+          // ignore: deprecated_member_use
+            icon: FontAwesomeIcons.archive,
+            label: "Unidade",
+            circleColor: Colors.orange,
+            rota: "/produtoUnidadeLista"),
+        terceiroBotao: null,
+        quartoBotao: null,
+      ),
+      MenuInternoBotoes(
+        primeiroBotao: BotaoMenu(
+          // ignore: deprecated_member_use
+            icon: FontAwesomeIcons.boxes,
+            label: "Grupo",
+            circleColor: Colors.purple,
+            rota: "/produtoGrupoLista"),
+        segundoBotao: BotaoMenu(
+            icon: FontAwesomeIcons.cube,
+            label: "Subgrupo",
+            circleColor: Colors.indigo,
+            rota: "/produtoSubgrupoLista"),
+        terceiroBotao: BotaoMenu(
+            icon: FontAwesomeIcons.boxOpen,
+            label: "Produto",
+            circleColor: Colors.red,
+            rota: '/produtoLista'),
+        quartoBotao: null,
+      ),
+    ],
+  );
 
-  Widget actionMenuGrupoProduto() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Card(
-          color: Colors.amber[50],
-          elevation: 2.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const MenuTituloGrupoMenuInterno(titulo: "Grupo Produto"),
-                  MenuInternoBotoes(
-                    primeiroBotao: BotaoMenu(
-                        // ignore: deprecated_member_use
-                        icon: FontAwesomeIcons.archive,
-                        label: "Tipo Produto",
-                        circleColor: Colors.indigo,
-                        rota: "/produtoTipoLista"),
-                    segundoBotao: BotaoMenu(
-                        // ignore: deprecated_member_use
-                        icon: FontAwesomeIcons.archive,
-                        label: "Unidade",
-                        circleColor: Colors.orange,
-                        rota: "/produtoUnidadeLista"),
-                    terceiroBotao: null,
-                    quartoBotao: null,
-                  ),
-                  MenuInternoBotoes(
-                    primeiroBotao: BotaoMenu(
-                        // ignore: deprecated_member_use
-                        icon: FontAwesomeIcons.boxes,
-                        label: "Grupo",
-                        circleColor: Colors.purple,
-                        rota: "/produtoGrupoLista"),
-                    segundoBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.cube,
-                        label: "Subgrupo",
-                        circleColor: Colors.indigo,
-                        rota: "/produtoSubgrupoLista"),
-                    terceiroBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.boxOpen,
-                        label: "Produto",
-                        circleColor: Colors.red,
-                        rota: '/produtoLista'),
-                    quartoBotao: null,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-
-  Widget actionMenuGrupoGeral() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Card(
-          color: Colors.amber[50],
-          elevation: 2.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const MenuTituloGrupoMenuInterno(titulo: "Grupo Geral"),
-                  MenuInternoBotoes(
-                    primeiroBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.building,
-                        label: "Empresa",
-                        circleColor: Colors.blue,
-                        rota: "/empresaPersiste"),
-                    segundoBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.moneyBill,
-                        label: "Tipo Pagamento",
-                        circleColor: Colors.orange,
-                        rota: "/pdvTipoPagamentoLista"),
-                    terceiroBotao: null,
-                    quartoBotao: null,
-                  ),                  
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
+  Widget actionMenuGrupoGeral() => ActionMenuGrupo(
+    children: <Widget>[
+      const MenuTituloGrupoMenuInterno(titulo: "Grupo Geral"),
+      MenuInternoBotoes(
+        primeiroBotao: BotaoMenu(
+            icon: FontAwesomeIcons.building,
+            label: "Empresa",
+            circleColor: Colors.blue,
+            rota: "/empresaPersiste"),
+        segundoBotao: BotaoMenu(
+            icon: FontAwesomeIcons.moneyBill,
+            label: "Tipo Pagamento",
+            circleColor: Colors.orange,
+            rota: "/pdvTipoPagamentoLista"),
+        terceiroBotao: null,
+        quartoBotao: null,
+      ),
+    ],
+  );
 
 
-  Widget actionMenuGrupoTributacao() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Card(
-          elevation: 2.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const MenuTituloGrupoMenuInterno(titulo: "Cadastros - Tributação"),
-                  MenuInternoBotoes(
-                    primeiroBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.solidUser,
-                        label: "Operação Fiscal",
-                        circleColor: Colors.blue,
-                        rota: "/tributOperacaoFiscalLista"),
-                    segundoBotao: BotaoMenu(
-                        icon: FontAwesomeIcons.addressCard,
-                        label: "Grupo Tributário",
-                        circleColor: Colors.orange,
-                        rota: "/tributGrupoTributarioLista"),
-                    terceiroBotao: null,
-                    quartoBotao: null,
-                  ),
-                  MenuInternoBotoes(
-                    primeiroBotao: null,
-                    segundoBotao: null,
-                    terceiroBotao: BotaoMenu(
-                        // ignore: deprecated_member_use
-                        icon: FontAwesomeIcons.truckLoading,
-                        label: "Configura Tributação",
-                        circleColor: Colors.purple,
-                        rota: "/tributConfiguraOfGtLista"),
-                    quartoBotao: null,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
+  Widget actionMenuGrupoTributacao() => ActionMenuGrupo(
+    children: <Widget>[
+      const MenuTituloGrupoMenuInterno(titulo: "Cadastros - Tributação"),
+      MenuInternoBotoes(
+        primeiroBotao: BotaoMenu(
+            icon: FontAwesomeIcons.solidUser,
+            label: "Operação Fiscal",
+            circleColor: Colors.blue,
+            rota: "/tributOperacaoFiscalLista"),
+        segundoBotao: BotaoMenu(
+            icon: FontAwesomeIcons.addressCard,
+            label: "Grupo Tributário",
+            circleColor: Colors.orange,
+            rota: "/tributGrupoTributarioLista"),
+        terceiroBotao: null,
+        quartoBotao: null,
+      ),
+      MenuInternoBotoes(
+        primeiroBotao: null,
+        segundoBotao: null,
+        terceiroBotao: BotaoMenu(
+          // ignore: deprecated_member_use
+            icon: FontAwesomeIcons.truckLoading,
+            label: "Configura Tributação",
+            circleColor: Colors.purple,
+            rota: "/tributConfiguraOfGtLista"),
+        quartoBotao: null,
+      ),
+    ],
+  );
 
 }

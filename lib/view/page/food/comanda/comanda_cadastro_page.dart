@@ -156,10 +156,7 @@ class ComandaCadastroPageState extends State<ComandaCadastroPage> {
                   onPressed: () async {
                     ///chamando o lookup
                     Map<String, dynamic>? objetoJsonRetorno =
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
+                      await Navigate.to(context,
                           LookupLocalPage(
                             title: 'Importar Cliente',
                             colunas: ClienteDao.colunas,
@@ -171,7 +168,7 @@ class ComandaCadastroPageState extends State<ComandaCadastroPage> {
                             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/clienteLista',); },
                           ),
                           fullscreenDialog: true,
-                        ));
+                        );
                     if (objetoJsonRetorno != null) {
                       if (objetoJsonRetorno['nome'] != null) {
                         _importaClienteController.text = objetoJsonRetorno['nome'];
@@ -233,10 +230,7 @@ class ComandaCadastroPageState extends State<ComandaCadastroPage> {
                   onPressed: () async {
                     ///chamando o lookup
                     Map<String, dynamic>? objetoJsonRetorno =
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
+                      await Navigate.to(context,
                           LookupLocalPage(
                             title: 'Importar Colaborador',
                             colunas: ColaboradorDao.colunas,
@@ -248,7 +242,7 @@ class ComandaCadastroPageState extends State<ComandaCadastroPage> {
                             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/colaboradorLista',); },
                           ),
                           fullscreenDialog: true,
-                        ));
+                        );
                     if (objetoJsonRetorno != null) {
                       if (objetoJsonRetorno['nome'] != null) {
                         _importaColaboradorController.text = objetoJsonRetorno['nome'];

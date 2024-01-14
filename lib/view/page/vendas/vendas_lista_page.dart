@@ -591,15 +591,7 @@ class VendasListaPageState extends State<VendasListaPage> {
 
   void _imprimirCupomSatCancelamento(Uint8List cupom) {
     Sessao.fecharDialogBoxEspera(context);
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => PdfPage(
-          arquivoPdf: cupom, title: 'Cfe-Sat')
-        )
-      ).then(
-        (value) {
-        }
-      );          
+    Navigate.to(context, PdfPage(arquivoPdf: cupom, title: 'Cfe-Sat'));
   }
 
   /////////////////////////////////////////
@@ -695,13 +687,10 @@ class _PdvVendaCabecalhoDataSource extends DataTableSource {
                 gerarDialogBoxErro(context, "Venda não vinculada a uma NFC-e ou NFC-e não autorizada");
               } else {
                 // ignore: use_build_context_synchronously
-                Navigator.of(context)
-                    .push(MaterialPageRoute(
-                        builder: (BuildContext context) => NfeDevolucaoPage(
-                              nfeCabecalhoMontado: nfeCabecalhoMontado,
-                              title: 'Devolução de Mercadoria',
-                            )))
-                    .then((_) async {
+                Navigate.to(context, NfeDevolucaoPage(
+                  nfeCabecalhoMontado: nfeCabecalhoMontado,
+                  title: 'Devolução de Mercadoria',
+                )).then((_) async {
                   await refrescarTela();
                 });
               }
@@ -741,13 +730,10 @@ class _PdvVendaCabecalhoDataSource extends DataTableSource {
                     gerarDialogBoxInformacao(context, 'Nota fiscal não autorizada. Verifique se foi contigenciada e se está pendente de autorização.');
                   } else {
                     // ignore: use_build_context_synchronously
-                    Navigator.of(context)
-                      .push(MaterialPageRoute(
-                        builder: (BuildContext context) => NfeCabecalhoPage(
-                          nfeCabecalhoMontado: nfeCabecalhoMontado, 
-                          title: 'Detalhe da NFC-e', 
-                        )))
-                      .then((_) async {    
+                    Navigate.to(context, NfeCabecalhoPage(
+                      nfeCabecalhoMontado: nfeCabecalhoMontado,
+                      title: 'Detalhe da NFC-e',
+                    )).then((_) async {
                         await refrescarTela();
                     });
                   }

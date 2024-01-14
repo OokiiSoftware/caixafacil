@@ -264,8 +264,7 @@ class MesaPageState extends State<MesaPage> {
             icone: FontAwesomeIcons.handHolding, 
             textOuTip: 'Takeout',
             onPressed: () {
-              Navigator.push(
-                context, MaterialPageRoute(builder: (_) => ComandaPage(title: 'Comandas', mesa: Mesa(id: null), tipo: 'T'))
+              Navigate.to(context, ComandaPage(title: 'Comandas', mesa: Mesa(id: null), tipo: 'T')
               ).then((value) async { await _consultarMesas(); });
             },
           ),          
@@ -284,8 +283,7 @@ class MesaPageState extends State<MesaPage> {
             icone: FontAwesomeIcons.bicycle, 
             textOuTip: 'Delivery',
             onPressed: () {
-              Navigator.push(
-                context, MaterialPageRoute(builder: (_) => ComandaPage(title: 'Comandas', mesa: Mesa(id: null), tipo: 'D'))
+              Navigate.to(context, ComandaPage(title: 'Comandas', mesa: Mesa(id: null), tipo: 'D')
               ).then((value) async { await _consultarMesas(); });
             },
           ),          
@@ -304,8 +302,7 @@ class MesaPageState extends State<MesaPage> {
             icone: FontAwesomeIcons.list, 
             textOuTip: 'Consultar',
             onPressed: () {
-              Navigator.push(
-                context, MaterialPageRoute(builder: (_) => const ComandaListaPage())
+              Navigate.to(context, const ComandaListaPage()
               ).then((value) async { await _consultarMesas(); });
             },
           ),          
@@ -393,12 +390,10 @@ class MesaPageState extends State<MesaPage> {
       hoverColor: Colors.black38,
       onTap: () {
         if (widget.operacao == 'CAD') {
-          Navigator.push(
-            context, MaterialPageRoute(builder: (_) => MesaCadastroPage(listaMesa[index]))
+          Navigate.to(context, MesaCadastroPage(listaMesa[index])
           ).then((value) async { await _consultarMesas(); });
-        } else if (widget.operacao == 'COM') { 
-          Navigator.push(
-            context, MaterialPageRoute(builder: (_) => ComandaPage(title: 'Comandas', mesa: listaMesa[index], tipo: 'I'))
+        } else if (widget.operacao == 'COM') {
+          Navigate.to(context, ComandaPage(title: 'Comandas', mesa: listaMesa[index], tipo: 'I')
           ).then((value) async { await _consultarMesas(); });
         }
       },

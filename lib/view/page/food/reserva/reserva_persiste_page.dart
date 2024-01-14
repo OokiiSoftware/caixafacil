@@ -196,10 +196,7 @@ class ReservaPersistePageState extends State<ReservaPersistePage> {
                                       onPressed: () async {
                                         ///chamando o lookup
                                         Map<String, dynamic>? objetoJsonRetorno =
-                                        await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (BuildContext context) =>
+                                        await Navigate.to(context,
                                                   LookupLocalPage(
                                                     title: 'Importar Cliente',
                                                     colunas: ClienteDao.colunas,
@@ -211,7 +208,7 @@ class ReservaPersistePageState extends State<ReservaPersistePage> {
                                                     metodoCadastroCallBack: () { Navigator.pushNamed(context, '/clienteLista',); },
                                                   ),
                                               fullscreenDialog: true,
-                                            ));
+                                            );
                                         if (objetoJsonRetorno != null) {
                                           if (objetoJsonRetorno['nome'] != null) {
                                             importaClienteController.text = objetoJsonRetorno['nome'];
@@ -454,16 +451,12 @@ class ReservaPersistePageState extends State<ReservaPersistePage> {
     if (_reserva!.dataReserva == null) {
       showInSnackBar('Por favor, informe a data da reserva.', context);
     } else {
-      final retorno = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => MesaPage(
+      final retorno = await Navigate.to(context, MesaPage(
             title: 'Reserva de Mesa',
             reserva: _reserva,
             operacao: 'RES',
           ),
           fullscreenDialog: true,
-        )
       );   
       if (retorno != null) {
         listaMesa = retorno;

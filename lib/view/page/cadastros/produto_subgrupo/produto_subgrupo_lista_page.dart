@@ -197,32 +197,27 @@ class ProdutoSubgrupoListaPageState extends State<ProdutoSubgrupoListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
+    Navigate.to(context,
           ProdutoSubgrupoPersistePage(
             produtoSubgrupoMontado: ProdutoSubgrupoMontado(
               produtoSubgrupo: ProdutoSubgrupo(id: null,),
               produtoGrupo: ProdutoGrupo(id: null,),
             ), 
             title: 'Produto Subgrupo - Inserindo', operacao: 'I'
-          )))
+          ))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Produto Subgrupo - Filtro',
             colunas: _colunas,
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -306,10 +301,8 @@ class _ProdutoSubgrupoMontadoDataSource extends DataTableSource {
 }
 
 void _detalharProdutoSubgrupoMontado(ProdutoSubgrupoMontado produtoSubgrupoMontado, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => ProdutoSubgrupoPersistePage(
-      produtoSubgrupoMontado: produtoSubgrupoMontado, title: 'ProdutoSubgrupoMontado - Editando', operacao: 'A')))
+  Navigate.to(context, ProdutoSubgrupoPersistePage(
+      produtoSubgrupoMontado: produtoSubgrupoMontado, title: 'ProdutoSubgrupoMontado - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

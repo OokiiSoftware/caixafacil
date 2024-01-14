@@ -181,10 +181,7 @@ class ProdutoFichaTecnicaPersistePageState extends State<ProdutoFichaTecnicaPers
                                     onPressed: () async {
                                       ///chamando o lookup
                                       Map<String, dynamic>? objetoJsonRetorno =
-                                      await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) =>
+                                      await Navigate.to(context,
                                                 LookupLocalPage(
                                                   title: 'Importar Produto',
                                                   colunas: ProdutoDao.colunas,
@@ -196,7 +193,7 @@ class ProdutoFichaTecnicaPersistePageState extends State<ProdutoFichaTecnicaPers
                                                   metodoCadastroCallBack: () { Navigator.pushNamed(context, '/produtoLista',); },
                                                 ),
                                             fullscreenDialog: true,
-                                          ));
+                                          );
                                       if (objetoJsonRetorno != null) {
                                         if (objetoJsonRetorno['nome'] != null) {
                                           importaProdutoController.text = objetoJsonRetorno['nome'];

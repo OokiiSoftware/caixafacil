@@ -781,35 +781,19 @@ class DashboardPageState extends State<DashboardPage> {
   }
 
   _chamarContasReceber() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => const ContasReceberListaPage()))
-      .then((_) {    
-    });
+    Navigate.to(context, const ContasReceberListaPage());
   }
 
   _chamarContasPagar() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => const ContasPagarListaPage()))
-      .then((_) {    
-    });
+    Navigate.to(context, const ContasPagarListaPage());
   }
 
   _chamarEstoque() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => const EstoqueListaPage()))
-      .then((_) {    
-    });
+    Navigate.to(context, const EstoqueListaPage());
   }
 
   _chamarVendas() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => const VendasListaPage()))
-      .then((_) {    
-    });
+    Navigate.to(context, const VendasListaPage());
   }
 
 }

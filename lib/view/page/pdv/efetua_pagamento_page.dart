@@ -613,9 +613,8 @@ class EfetuaPagamentoPageState extends State<EfetuaPagamentoPage> {
       }
     }
     if (totalParcelamento > 0) {
-      bool? finalizouParcelamento = await Navigator.of(context)
-        .push(MaterialPageRoute(
-            builder: (BuildContext context) => ParcelamentoReceitasPage(title: 'Parcelamento da Venda', totalParcelamento: totalParcelamento,)));
+      bool? finalizouParcelamento = await Navigate.to(context,
+          ParcelamentoReceitasPage(title: 'Parcelamento da Venda', totalParcelamento: totalParcelamento,));
       if (!mounted) return;
       if (finalizouParcelamento ?? false) {
         Navigator.pop(context, true);

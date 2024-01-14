@@ -337,9 +337,7 @@ class CompraPedidoCabecalhoListaPageState extends State<CompraPedidoCabecalhoLis
     final colaborador = await Sessao.db.colaboradorDao.consultarObjeto(1);
     CompraPedidoCabecalhoController.listaCompraDetalhe = CompraPedidoCabecalhoListaPage.listaCompraDetalhe ?? [];
     if (!mounted) return;
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
+    Navigate.to(context,
           CompraPedidoCabecalhoPage(
             compraPedidoCabecalhoMontado: CompraPedidoCabecalhoMontado(
               compraPedidoCabecalho: CompraPedidoCabecalhoListaPage.compraPedidoCabecalho,
@@ -347,7 +345,7 @@ class CompraPedidoCabecalhoListaPageState extends State<CompraPedidoCabecalhoLis
             ), 
             title: 'Pedido de Compra - Inserindo', 
             operacao: 'I'
-          )))
+          ))
       .then((_) async {
         CompraPedidoCabecalhoListaPage.compraPedidoCabecalho = null;
         CompraPedidoCabecalhoListaPage.listaCompraDetalhe = [];
@@ -489,13 +487,11 @@ void _detalharCompraPedidoCabecalho(CompraPedidoCabecalhoMontado compraPedidoCab
   CompraPedidoCabecalhoController.listaCompraDetalhe = 
     await Sessao.db.compraPedidoDetalheDao.consultarListaComProduto(compraPedidoCabecalhoMontado.compraPedidoCabecalho!.id!);
   // ignore: use_build_context_synchronously
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => CompraPedidoCabecalhoPage(
+  Navigate.to(context, CompraPedidoCabecalhoPage(
         compraPedidoCabecalhoMontado: compraPedidoCabecalhoMontado, 
         title: 'Pedido de Compra - Editando', 
         operacao: 'A'
-      )))
+      ))
     .then((_) async {    
       await refrescarTela();
    });

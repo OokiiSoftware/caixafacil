@@ -226,12 +226,7 @@ class MovimentoEncerraPageState extends State<MovimentoEncerraPage> {
                         descricao: 'Visualizar Movimentos Anteriores',
                         cor: Colors.blue, 
                         onPressed: () {
-                          Navigator.of(context)
-                            .push(MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const MovimentoListaPage()))
-                            .then((_) {
-                            });
+                          Navigate.to(context, const MovimentoListaPage());
                         }
                       ),                                         
                       const SizedBox(
@@ -241,11 +236,7 @@ class MovimentoEncerraPageState extends State<MovimentoEncerraPage> {
                         descricao: 'Imprime Movimento Atual',
                         cor: Colors.green,
                         onPressed: () {
-                          Navigator.of(context)
-                            .push(MaterialPageRoute(
-                              builder: (BuildContext context) => EncerraMovimentoRelatorio(movimento: Sessao.movimento)))
-                            .then((_) {
-                            });                      
+                          Navigate.to(context, EncerraMovimentoRelatorio(movimento: Sessao.movimento));
                         }
                       ),                                         
                     ],
@@ -551,9 +542,7 @@ class MovimentoEncerraPageState extends State<MovimentoEncerraPage> {
       Sessao.movimento = await Sessao.db.pdvMovimentoDao.encerrarMovimento(Sessao.movimento!, listaFechamento: _listaFechamento);
       await SincronizaController.subirDadosMovimento();
       if (!mounted) return;
-      Navigator.of(context)
-        .push(MaterialPageRoute(
-          builder: (BuildContext context) => EncerraMovimentoRelatorio(movimento: Sessao.movimento)))
+      Navigate.to(context, EncerraMovimentoRelatorio(movimento: Sessao.movimento))
         .then((_) async {
           Sessao.movimento = PdvMovimento(id: null, dataAbertura: DateTime.now(), horaAbertura: Biblioteca.formatarHora(DateTime.now()), statusMovimento: 'A');
           Sessao.movimento = await Sessao.db.pdvMovimentoDao.iniciarMovimento(Sessao.movimento!);

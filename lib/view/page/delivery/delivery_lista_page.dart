@@ -394,16 +394,14 @@ class _DeliveryDataSource extends DataTableSource {
               deliveryacerto = await Sessao.db.deliveryAcertoDao.consultarObjetoFiltro('ID', deliveryAcertoComanda.idDeliveryAcerto.toString());
             }            
             // ignore: use_build_context_synchronously
-            Navigator.of(context)
-              .push(MaterialPageRoute(
-                builder: (BuildContext context) => DeliveryAcertoPersistePage(
+            Navigate.to(context, DeliveryAcertoPersistePage(
                   deliveryAcertoMontado: DeliveryAcertoMontado(
                     delivery: delivery, 
                     deliveryAcerto: deliveryacerto ?? DeliveryAcerto(id: null),
                     deliveryAcertoComanda: deliveryAcertoComanda ?? DeliveryAcertoComanda(id: null),
                   ), 
                   title: 'Acerto do Delivery', 
-                )))
+                ))
               .then((_) {    
             });            
           }
@@ -504,10 +502,8 @@ class _DeliveryDataSource extends DataTableSource {
 void _detalharDelivery(DeliveryMontado deliveryMontado, BuildContext context, Function refrescarTela) {
   deliveryMontado.colaborador = deliveryMontado.colaborador ?? Colaborador(id:null);
   deliveryMontado.taxaEntrega = deliveryMontado.taxaEntrega ?? TaxaEntrega(id:null);
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => DeliveryPersistePage(
-      deliveryMontado: deliveryMontado, title: 'Delivery - Editando', operacao: 'A')))
+  Navigate.to(context, DeliveryPersistePage(
+      deliveryMontado: deliveryMontado, title: 'Delivery - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

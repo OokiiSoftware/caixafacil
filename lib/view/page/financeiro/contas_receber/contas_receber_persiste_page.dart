@@ -183,10 +183,7 @@ class ContasReceberPersistePageState extends State<ContasReceberPersistePage> {
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) =>
+                                    await Navigate.to(context,
                                               LookupLocalPage(
                                                 title: 'Importar Cliente',
                                                 colunas: ClienteDao.colunas,
@@ -198,7 +195,7 @@ class ContasReceberPersistePageState extends State<ContasReceberPersistePage> {
                                                 metodoCadastroCallBack: () { Navigator.pushNamed(context, '/clienteLista',); },
                                               ),
                                           fullscreenDialog: true,
-                                        ));
+                                        );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['nome'] != null) {
                                         importaClienteController.text = objetoJsonRetorno['nome'];

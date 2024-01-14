@@ -266,10 +266,7 @@ class IdentificaClientePageState extends State<IdentificaClientePage> {
                               tooltip: 'Importar Cliente',
                               icon: ViewUtilLib.getIconBotaoLookup(),
                               onPressed: () async {
-                                Map<String, dynamic>? objetoJsonRetorno = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) => LookupLocalPage(
+                                Map<String, dynamic>? objetoJsonRetorno = await Navigate.to(context, LookupLocalPage(
                                         title: 'Importar Cliente',
                                         colunas: ClienteDao.colunas,
                                         campos: ClienteDao.campos,
@@ -280,7 +277,7 @@ class IdentificaClientePageState extends State<IdentificaClientePage> {
                                         metodoCadastroCallBack: () { Navigator.pushNamed(context, '/clienteLista',); },
                                       ),
                                       fullscreenDialog: true,
-                                    ));
+                                    );
                                 if (objetoJsonRetorno != null) {
                                   setState(() {
                                     Sessao.vendaAtual = 

@@ -167,10 +167,7 @@ class ProdutoSubgrupoPersistePageState extends State<ProdutoSubgrupoPersistePage
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) => LookupLocalPage(
+                                    await Navigate.to(context, LookupLocalPage(
                                             title: 'Importar Grupo',
                                             colunas: ProdutoGrupoDao.colunas,
                                             campos: ProdutoGrupoDao.campos,
@@ -181,7 +178,7 @@ class ProdutoSubgrupoPersistePageState extends State<ProdutoSubgrupoPersistePage
                                             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/produtoGrupoLista',); },
                                           ),
                                           fullscreenDialog: true,
-                                        ));
+                                        );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['nome'] != null) {
                                         importaProdutoGrupoController.text = objetoJsonRetorno['nome'];

@@ -44,12 +44,13 @@ class MenuInternoBotoes extends StatelessWidget {
   final BotaoMenu? terceiroBotao;
   final BotaoMenu? quartoBotao;
 
-  const MenuInternoBotoes(
-      {super.key,
-      this.primeiroBotao,
-      this.segundoBotao,
-      this.terceiroBotao,
-      this.quartoBotao});
+  const MenuInternoBotoes({
+    super.key,
+    this.primeiroBotao,
+    this.segundoBotao,
+    this.terceiroBotao,
+    this.quartoBotao,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -114,13 +115,11 @@ class BotaoMenu {
   String? rota;
   Function? onPressed;
 
-  BotaoMenu(
-    {
-      this.icon,
-      this.label,
-      this.circleColor,
-      this.rota,
-      this.onPressed,
-    }
-  );
+  BotaoMenu({
+    this.icon,
+    this.label,
+    this.circleColor,
+    this.rota,
+    this.onPressed,
+  });
 }

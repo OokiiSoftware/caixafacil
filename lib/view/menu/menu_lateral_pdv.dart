@@ -147,13 +147,8 @@ class _State extends State<MenuLateralPDV> {
                       padding: const EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
                     ),                    
-                    onPressed: () { 
-                      Navigator.of(context)
-                        .push(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const NfceContrataPage()))
-                        .then((_) {
-                        });
+                    onPressed: () {
+                      Navigate.to(context, const NfceContrataPage());
                       },
                     child: Container(
                       height: 120.0,
@@ -181,13 +176,8 @@ class _State extends State<MenuLateralPDV> {
               ),
             ),
             ListTile(
-              onTap:  () { 
-                Navigator.of(context)
-                  .push(MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const MovimentoEncerraPage(title: 'Encerra Movimento')))
-                  .then((_) {
-                  });
+              onTap:  () {
+                Navigate.to(context, const MovimentoEncerraPage(title: 'Encerra Movimento'));
                 },
               title: const Text(
                 "Movimento",
@@ -235,13 +225,10 @@ class _State extends State<MenuLateralPDV> {
               ),
             ),
             ListTile(
-              onTap: () { 
-                Navigator.of(context)
-                  .push(MaterialPageRoute(
-                    builder: (BuildContext context) => const MenuCadastros()))
-                  .then((_) {
-                    //Provider.of<BancoViewModel>(context).consultarLista();
-                  });
+              onTap: () {
+                Navigate.to(context, const MenuCadastros()).then((_) {
+                  //Provider.of<BancoViewModel>(context).consultarLista();
+                });
                 },
               title: const Text(
                 "Cadastros",
@@ -254,11 +241,8 @@ class _State extends State<MenuLateralPDV> {
               ),
             ),
             ListTile(
-              onTap: () { 
-                Navigator.of(context)
-                  .push(MaterialPageRoute(
-                    builder: (BuildContext context) => const CompraPedidoCabecalhoListaPage()))
-                  .then((_) {
+              onTap: () {
+                Navigate.to(context, const CompraPedidoCabecalhoListaPage()).then((_) {
                     //Provider.of<BancoViewModel>(context).consultarLista();
                   });
                 },
@@ -274,11 +258,8 @@ class _State extends State<MenuLateralPDV> {
               ),
             ),
             ListTile(
-              onTap: () { 
-                Navigator.of(context)
-                  .push(MaterialPageRoute(
-                    builder: (BuildContext context) => const EstoqueListaPage()))
-                  .then((_) {
+              onTap: () {
+                Navigate.to(context, const EstoqueListaPage()).then((_) {
                     //Provider.of<BancoViewModel>(context).consultarLista();
                   });
                 },
@@ -294,11 +275,8 @@ class _State extends State<MenuLateralPDV> {
               ),
             ),
             ListTile(
-              onTap: () { 
-                Navigator.of(context)
-                  .push(MaterialPageRoute(
-                    builder: (BuildContext context) => const MenuFinanceiro()))
-                  .then((_) {
+              onTap: () {
+                Navigate.to(context, const MenuFinanceiro()).then((_) {
                     //Provider.of<BancoViewModel>(context).consultarLista();
                   });
                 },
@@ -315,11 +293,8 @@ class _State extends State<MenuLateralPDV> {
             ),
 
             ListTile(
-              onTap: () { 
-                Navigator.of(context)
-                  .push(MaterialPageRoute(
-                    builder: (BuildContext context) => const DashboardPage()))
-                  .then((_) {
+              onTap: () {
+                Navigate.to(context, const DashboardPage()).then((_) {
                     //Provider.of<BancoViewModel>(context).consultarLista();
                   });
                 },
@@ -334,11 +309,8 @@ class _State extends State<MenuLateralPDV> {
             ),
 
             ListTile(
-              onTap: () { 
-                Navigator.of(context)
-                  .push(MaterialPageRoute(
-                    builder: (BuildContext context) => const VendasListaPage()))
-                  .then((_) {
+              onTap: () {
+                Navigate.to(context, const VendasListaPage()).then((_) {
                     //Provider.of<BancoViewModel>(context).consultarLista();
                   });
                 },
@@ -358,12 +330,8 @@ class _State extends State<MenuLateralPDV> {
             Sessao.cnaePermiteModuloFood
             ?
               ListTile(
-                onTap: () { 
-                  Navigator.of(context)
-                    .push(MaterialPageRoute(
-                      builder: (BuildContext context) => const MenuFood()))
-                    .then((_) {
-                    });
+                onTap: () {
+                  Navigate.to(context, const MenuFood());
                   },
                 title: const Text(
                   "Módulo Food",
@@ -381,11 +349,8 @@ class _State extends State<MenuLateralPDV> {
             Sessao.configuracaoPdv!.moduloFiscalPrincipal == 'NFC' 
             ? 
               ListTile(
-                onTap: () { 
-                  Navigator.of(context)
-                    .push(MaterialPageRoute(
-                      builder: (BuildContext context) => const MenuFiscal()))
-                    .then((_) {
+                onTap: () {
+                  Navigate.to(context, const MenuFiscal()).then((_) {
                       //Provider.of<BancoViewModel>(context).consultarLista();
                     });
                   },
@@ -414,11 +379,8 @@ class _State extends State<MenuLateralPDV> {
               ),
             ),
             ListTile(
-              onTap:  () {    
-                Navigator.of(context)
-                  .push(MaterialPageRoute(
-                    builder: (BuildContext context) => const ConfiguracaoPage()))
-                  .then((_) {
+              onTap:  () {
+                Navigate.to(context, const ConfiguracaoPage()).then((_) {
                     //Provider.of<BancoViewModel>(context).consultarLista();
                   });
               },

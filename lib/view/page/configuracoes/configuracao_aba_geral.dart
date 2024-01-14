@@ -386,10 +386,7 @@ class ConfiguracaoAbaGeralState extends State<ConfiguracaoAbaGeral> {
                         onPressed: () async {
                           ///chamando o lookup
                           Map<String, dynamic>? objetoJsonRetorno =
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
+                            await Navigate.to(context,
                                   LookupLocalPage(
                                     title: 'Importar Operação Fiscal',
                                     colunas: TributOperacaoFiscalDao.colunas,
@@ -399,7 +396,7 @@ class ConfiguracaoAbaGeralState extends State<ConfiguracaoAbaGeral> {
                                     metodoConsultaCallBack: TributOperacaoFiscalController.filtrarOperacaoFiscalLookup,
                                   ),
                                   fullscreenDialog: true,
-                                ));
+                                );
                           if (objetoJsonRetorno != null) {
                             if (objetoJsonRetorno['descricao'] != null) {
                               Sessao.configuracaoPdv = 

@@ -381,30 +381,25 @@ class ContasReceberListaPageState extends State<ContasReceberListaPage> {
 
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
+    Navigate.to(context,
             ContasReceberPersistePage(contasReceberMontado: ContasReceberMontado(
               cliente: Cliente(id: null,),
               contasReceber: ContasReceber(id: null, dataVencimento: DateTime.now(),),
-            ), title: 'Contas a Receber - Inserindo', operacao: 'I')))
+            ), title: 'Contas a Receber - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'ContasReceber - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Nome',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -543,10 +538,8 @@ class _ContasReceberDataSource extends DataTableSource {
 }
 
 void _detalharContasReceber(ContasReceberMontado contasReceberMontado, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => ContasReceberPersistePage(
-      contasReceberMontado: contasReceberMontado, title: 'Contas a Receber - Editando', operacao: 'A')))
+  Navigate.to(context, ContasReceberPersistePage(
+      contasReceberMontado: contasReceberMontado, title: 'Contas a Receber - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

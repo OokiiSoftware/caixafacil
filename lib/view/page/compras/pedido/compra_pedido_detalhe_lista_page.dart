@@ -126,14 +126,12 @@ class CompraPedidoDetalheListaPageState extends State<CompraPedidoDetalheListaPa
   void _inserir() async {
     if (_podeAlterarPedido()) {
       CompraDetalhe? compraDetalhe = CompraDetalhe();
-      compraDetalhe = await Navigator.of(context)
-        .push(MaterialPageRoute(
-          builder: (BuildContext context) =>
+      compraDetalhe = await Navigate.to(context,
             CompraPedidoDetalhePersistePage(
               compraPedidoCabecalho: CompraPedidoCabecalhoController.compraPedidoCabecalho,
               compraDetalhe: compraDetalhe,
               title: 'Detalhes do Pedido - Inserindo',
-              operacao: 'I')));
+              operacao: 'I'));
       if (compraDetalhe!= null) { 
         CompraPedidoCabecalhoController.listaCompraDetalhe.add(compraDetalhe);
       }
@@ -198,14 +196,12 @@ class CompraPedidoDetalheListaPageState extends State<CompraPedidoDetalheListaPa
 
   void _detalharCompraPedidoDetalhe(CompraPedidoCabecalho? compraPedidoCabecalho, CompraDetalhe compraDetalhe, BuildContext context) {
     if (_podeAlterarPedido()) {
-      Navigator.of(context)
-        .push(MaterialPageRoute(
-          builder: (BuildContext context) => CompraPedidoDetalhePersistePage(
+      Navigate.to(context, CompraPedidoDetalhePersistePage(
             compraPedidoCabecalho: CompraPedidoCabecalhoController.compraPedidoCabecalho,
             compraDetalhe: compraDetalhe,
             title: 'Detalhes do Pedido - Alterando',
             operacao: 'A',
-          )))
+          ))
         .then((_) {
           setState(() {
             _getRows();

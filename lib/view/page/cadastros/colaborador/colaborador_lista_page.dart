@@ -229,27 +229,22 @@ class ColaboradorListaPageState extends State<ColaboradorListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-            ColaboradorPersistePage(colaborador: Colaborador(id: null,), title: 'Colaborador - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+            ColaboradorPersistePage(colaborador: Colaborador(id: null,), title: 'Colaborador - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Colaborador - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Nome',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -350,10 +345,8 @@ class _ColaboradorDataSource extends DataTableSource {
 
 void _detalharColaborador(Colaborador colaborador, BuildContext context, Function refrescarTela) {
   if (colaborador.id != 1) {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => ColaboradorPersistePage(
-        colaborador: colaborador, title: 'Colaborador - Editando', operacao: 'A')))
+    Navigate.to(context, ColaboradorPersistePage(
+        colaborador: colaborador, title: 'Colaborador - Editando', operacao: 'A'))
       .then((_) async {    
         await refrescarTela();
     });

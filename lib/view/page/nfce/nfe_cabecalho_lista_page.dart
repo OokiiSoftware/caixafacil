@@ -219,11 +219,8 @@ class NfeCabecalhoListaPageState extends State<NfeCabecalhoListaPage> {
   // seu número precisa ser inutilizado ou ela precisa ser cancelada
   Future _imprimirDanfe(Uint8List danfe) async {
     Sessao.fecharDialogBoxEspera(context);
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => PdfPage(
-          arquivoPdf: danfe, title: 'NFC-e')
-        )
+    Navigate.to(context, PdfPage(
+        arquivoPdf: danfe, title: 'NFC-e')
       ).then(
         (value) async {
           NfceController.nfeCabecalhoMontado!.nfeCabecalho = NfceController.nfeCabecalhoMontado!.nfeCabecalho!.copyWith(

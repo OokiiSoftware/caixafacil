@@ -192,10 +192,7 @@ class ProdutoPersistePageState extends State<ProdutoPersistePage> {
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) => LookupLocalPage(
+                                    await Navigate.to(context, LookupLocalPage(
                                             title: 'Importar Unidade',
                                             colunas: ProdutoUnidadeDao.colunas,
                                             campos: ProdutoUnidadeDao.campos,
@@ -206,7 +203,7 @@ class ProdutoPersistePageState extends State<ProdutoPersistePage> {
                                             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/produtoUnidadeLista',); },
                                           ),
                                           fullscreenDialog: true,
-                                        ));
+                                        );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['sigla'] != null) {
                                         importaProdutoUnidadeController.text = objetoJsonRetorno['sigla'];
@@ -258,10 +255,7 @@ class ProdutoPersistePageState extends State<ProdutoPersistePage> {
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) => LookupLocalPage(
+                                    await Navigate.to(context, LookupLocalPage(
                                             title: 'Importar Tipo',
                                             colunas: ProdutoTipoDao.colunas,
                                             campos: ProdutoTipoDao.campos,
@@ -272,7 +266,7 @@ class ProdutoPersistePageState extends State<ProdutoPersistePage> {
                                             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/produtoTipoLista',); },
                                           ),
                                           fullscreenDialog: true,
-                                        ));
+                                        );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['descricao'] != null) {
                                         importaProdutoTipoController.text = objetoJsonRetorno['descricao'];
@@ -324,10 +318,7 @@ class ProdutoPersistePageState extends State<ProdutoPersistePage> {
                                   onPressed: () async {
                                     ///chamando o lookup
                                     Map<String, dynamic>? objetoJsonRetorno =
-                                    await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) => LookupLocalPage(
+                                    await Navigate.to(context, LookupLocalPage(
                                             title: 'Importar Subgrupo',
                                             colunas: ProdutoSubgrupoDao.colunas,
                                             campos: ProdutoSubgrupoDao.campos,
@@ -338,7 +329,7 @@ class ProdutoPersistePageState extends State<ProdutoPersistePage> {
                                             metodoCadastroCallBack: () { Navigator.pushNamed(context, '/produtoSubgrupoLista',); },
                                           ),
                                           fullscreenDialog: true,
-                                        ));
+                                        );
                                     if (objetoJsonRetorno != null) {
                                       if (objetoJsonRetorno['nome'] != null) {
                                         importaProdutoSubgrupoController.text = objetoJsonRetorno['nome'];
@@ -395,10 +386,7 @@ class ProdutoPersistePageState extends State<ProdutoPersistePage> {
                                     onPressed: () async {
                                       ///chamando o lookup
                                       Map<String, dynamic>? objetoJsonRetorno =
-                                      await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) => LookupLocalPage(
+                                      await Navigate.to(context, LookupLocalPage(
                                               title: 'Importar Grupo Tributário',
                                               colunas: TributGrupoTributarioDao.colunas,
                                               campos: TributGrupoTributarioDao.campos,
@@ -409,7 +397,7 @@ class ProdutoPersistePageState extends State<ProdutoPersistePage> {
                                               // metodoCadastroCallBack: () { Navigator.pushNamed(context, '/produtoUnidadeLista',); },
                                             ),
                                             fullscreenDialog: true,
-                                          ));
+                                          );
                                       if (objetoJsonRetorno != null) {
                                         if (objetoJsonRetorno['descricao'] != null) {
                                           importaTributGrupoTributarioController.text = objetoJsonRetorno['descricao'];

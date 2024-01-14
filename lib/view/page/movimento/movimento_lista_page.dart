@@ -382,9 +382,5 @@ class _PdvMovimentoDataSource extends DataTableSource {
 }
 
 void _imprimirPdvMovimento(PdvMovimento pdvMovimento, BuildContext context) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => EncerraMovimentoRelatorio(movimento: pdvMovimento)))
-    .then((_) {
-    });
+  Navigate.to(context, EncerraMovimentoRelatorio(movimento: pdvMovimento));
 }

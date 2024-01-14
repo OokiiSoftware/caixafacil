@@ -50,20 +50,22 @@ class MenuTituloGrupoMenuInterno extends StatelessWidget {
         color: Colors.black54,
         elevation: 2.0,
         child: Center(
-            child: Text(titulo!,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(1.0, 1.0),
-                      blurRadius: 2.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                  ],
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ))),
+          child: Text(titulo!,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(1.0, 1.0),
+                  blurRadius: 2.0,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ],
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -191,26 +191,21 @@ class ComandaObservacaoPadraoListaPageState extends State<ComandaObservacaoPadra
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-          ComandaObservacaoPadraoPersistePage(comandaObservacaoPadrao: ComandaObservacaoPadrao(id: null,), title: 'Comanda Observacao Padrao - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+          ComandaObservacaoPadraoPersistePage(comandaObservacaoPadrao: ComandaObservacaoPadrao(id: null,), title: 'Comanda Observacao Padrao - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Comanda Observacao Padrao - Filtro',
             colunas: _colunas,
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -291,10 +286,8 @@ class _ComandaObservacaoPadraoDataSource extends DataTableSource {
 }
 
 void _detalharComandaObservacaoPadrao(ComandaObservacaoPadrao comandaObservacaoPadrao, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => ComandaObservacaoPadraoPersistePage(
-      comandaObservacaoPadrao: comandaObservacaoPadrao, title: 'ComandaObservacaoPadrao - Editando', operacao: 'A')))
+  Navigate.to(context, ComandaObservacaoPadraoPersistePage(
+      comandaObservacaoPadrao: comandaObservacaoPadrao, title: 'ComandaObservacaoPadrao - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

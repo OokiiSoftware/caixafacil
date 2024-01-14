@@ -192,11 +192,8 @@ class NfeCabecalhoPageState extends State<NfeCabecalhoPage> with SingleTickerPro
 
   Future _imprimirDanfe(Uint8List danfe) async {
     Sessao.fecharDialogBoxEspera(context);
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => PdfPage(
-          arquivoPdf: danfe, title: 'NFC-e')
-        )
+    Navigate.to(context, PdfPage(
+        arquivoPdf: danfe, title: 'NFC-e')
       ).then(
         (value) {
         }

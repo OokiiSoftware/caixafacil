@@ -199,26 +199,21 @@ class TaxaEntregaListaPageState extends State<TaxaEntregaListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-          TaxaEntregaPersistePage(taxaEntrega: TaxaEntrega(id: null,), title: 'Taxa Entrega - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+          TaxaEntregaPersistePage(taxaEntrega: TaxaEntrega(id: null,), title: 'Taxa Entrega - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Taxa Entrega - Filtro',
             colunas: _colunas,
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -302,10 +297,8 @@ class _TaxaEntregaDataSource extends DataTableSource {
 }
 
 void _detalharTaxaEntrega(TaxaEntrega taxaEntrega, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => TaxaEntregaPersistePage(
-      taxaEntrega: taxaEntrega, title: 'TaxaEntrega - Editando', operacao: 'A')))
+  Navigate.to(context, TaxaEntregaPersistePage(
+      taxaEntrega: taxaEntrega, title: 'TaxaEntrega - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

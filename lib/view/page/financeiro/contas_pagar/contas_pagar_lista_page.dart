@@ -380,30 +380,25 @@ class ContasPagarListaPageState extends State<ContasPagarListaPage> {
 
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
+    Navigate.to(context,
             ContasPagarPersistePage(contasPagarMontado: ContasPagarMontado(
               fornecedor: Fornecedor(id: null,),
               contasPagar: ContasPagar(id: null, dataVencimento: DateTime.now(),),
-            ), title: 'Contas a Pagar - Inserindo', operacao: 'I')))
+            ), title: 'Contas a Pagar - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'ContasPagar - Filtro',
             colunas: _colunas,
             campoPesquisaPadrao: 'Nome',
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -542,10 +537,8 @@ class _ContasPagarDataSource extends DataTableSource {
 }
 
 void _detalharContasPagar(ContasPagarMontado contasPagarMontado, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => ContasPagarPersistePage(
-      contasPagarMontado: contasPagarMontado, title: 'Contas a Pagar - Editando', operacao: 'A')))
+  Navigate.to(context, ContasPagarPersistePage(
+      contasPagarMontado: contasPagarMontado, title: 'Contas a Pagar - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

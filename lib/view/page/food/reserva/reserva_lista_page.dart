@@ -293,26 +293,21 @@ class ReservaListaPageState extends State<ReservaListaPage> {
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) => 
-          ReservaPersistePage(reservaMontado: ReservaMontado(reserva: Reserva(id: null,), cliente: Cliente(id: null)), title: 'Reserva - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+          ReservaPersistePage(reservaMontado: ReservaMontado(reserva: Reserva(id: null,), cliente: Cliente(id: null)), title: 'Reserva - Inserindo', operacao: 'I'))
       .then((_) async {
         await _refrescarTela();
     });
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Reserva - Filtro',
             colunas: _colunas,
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -424,10 +419,8 @@ class _ReservaDataSource extends DataTableSource {
 }
 
 void _detalharReserva(ReservaMontado reservaMontado, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => ReservaPersistePage(
-      reservaMontado: reservaMontado, title: 'Reserva - Editando', operacao: 'A')))
+  Navigate.to(context,ReservaPersistePage(
+      reservaMontado: reservaMontado, title: 'Reserva - Editando', operacao: 'A'))
     .then((_) async {    
       await refrescarTela();
    });

@@ -333,16 +333,13 @@ class ComandaListaPageState extends State<ComandaListaPage> {
   }
 
   void _chamarFiltro() async {
-    _filtro = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => FiltroPage(
+    _filtro = await Navigate.to(context, FiltroPage(
             title: 'Comanda - Filtro',
             colunas: _colunas,
             filtroPadrao: true,
           ),
           fullscreenDialog: true,
-        ));
+        );
     if (_filtro != null) {
       if (_filtro!.campo != null) {
         _filtro!.campo = _campos[int.parse(_filtro!.campo!)];
@@ -475,12 +472,11 @@ class _ComandaDataSource extends DataTableSource {
 }
 
 void _detalharComanda(ComandaMontado comandaMontado, BuildContext context, Function refrescarTela) {
-  Navigator.push(
-    context, MaterialPageRoute(builder: (_) => ComandaPage(
+  Navigate.to(context, ComandaPage(
       title: 'Comandas', 
       mesa: comandaMontado.mesa == null ? Mesa(id: null) : comandaMontado.mesa!, 
       tipo: comandaMontado.comanda!.tipo!,
       comandaMontado: comandaMontado,
-    )),
+    ),
   ).then((value) async { await refrescarTela(); });
 }

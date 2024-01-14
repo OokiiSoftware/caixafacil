@@ -174,17 +174,17 @@ class TributConfiguraOfGtListaPageState extends State<TributConfiguraOfGtListaPa
   }
 
   void _inserir() {
-    Navigator.of(context)
-      .push(MaterialPageRoute(
-        builder: (BuildContext context) =>
-          TributConfiguraOfGtPage(tributConfiguraOfGtMontado: TributConfiguraOfGtMontado(
-            tributConfiguraOfGt: TributConfiguraOfGt(id: null),
-            tributIcmsUf: TributIcmsUf(id: null, ufDestino: Sessao.empresa!.uf),
-            tributCofins: TributCofins(id: null, cstCofins: '99', modalidadeBaseCalculo: '0-Percentual', aliquotaPorcento: 0,),
-            tributPis: TributPis(id: null, cstPis: '99', modalidadeBaseCalculo: '0-Percentual', aliquotaPorcento: 0,),
-            tributGrupoTributario: TributGrupoTributario(id: null),
-            tributOperacaoFiscal: TributOperacaoFiscal(id: null),
-          ), title: 'Configura OF-GT - Inserindo', operacao: 'I')))
+    Navigate.to(context,
+        TributConfiguraOfGtPage(tributConfiguraOfGtMontado: TributConfiguraOfGtMontado(
+          tributConfiguraOfGt: TributConfiguraOfGt(id: null),
+          tributIcmsUf: TributIcmsUf(id: null, ufDestino: Sessao.empresa!.uf),
+          tributCofins: TributCofins(id: null, cstCofins: '99', modalidadeBaseCalculo: '0-Percentual', aliquotaPorcento: 0,),
+          tributPis: TributPis(id: null, cstPis: '99', modalidadeBaseCalculo: '0-Percentual', aliquotaPorcento: 0,),
+          tributGrupoTributario: TributGrupoTributario(id: null),
+          tributOperacaoFiscal: TributOperacaoFiscal(id: null),
+        ),
+          title: 'Configura OF-GT - Inserindo',
+          operacao: 'I',))
       .then((_) async {
         await _refrescarTela();
     });
@@ -263,14 +263,11 @@ class _TributConfiguraOfGtDataSource extends DataTableSource {
 }
 
 void _detalharTributConfiguraOfGt(TributConfiguraOfGtMontado tributConfiguraOfGtMontado, BuildContext context, Function refrescarTela) {
-  Navigator.of(context)
-    .push(MaterialPageRoute(
-      builder: (BuildContext context) => TributConfiguraOfGtPage(
-        tributConfiguraOfGtMontado: tributConfiguraOfGtMontado, 
-        title: 'Configura OF-GT - Editando', 
-        operacao: 'A'
-      )))
-    .then((_) async {    
+  Navigate.to(context, TributConfiguraOfGtPage(
+    tributConfiguraOfGtMontado: tributConfiguraOfGtMontado,
+    title: 'Configura OF-GT - Editando',
+    operacao: 'A'
+  )).then((_) async {
       await refrescarTela();
-   });
+  });
 }

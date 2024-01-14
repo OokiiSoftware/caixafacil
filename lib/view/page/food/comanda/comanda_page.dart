@@ -239,8 +239,7 @@ class ComandaPageState extends State<ComandaPage> {
         listaComandaMontado[index].cliente ??= Cliente(id: null);
         listaComandaMontado[index].colaborador ??= Colaborador(id: null);
 
-        Navigator.push(
-          context, MaterialPageRoute(builder: (_) => ComandaCadastroPage(listaComandaMontado[index]))
+        Navigate.to(context, ComandaCadastroPage(listaComandaMontado[index])
         ).then((value) async { await _consultarComandas(); });
       },
       splashColor: Colors.black,
@@ -484,8 +483,7 @@ class ComandaPageState extends State<ComandaPage> {
       comandaMontado.cliente ??= Cliente(id: null);
       comandaMontado.colaborador ??= Colaborador(id: null);
 
-      Navigator.push(
-        context, MaterialPageRoute(builder: (_) => ComandaDetalhePage(comandaMontado))
+      Navigate.to(context, ComandaDetalhePage(comandaMontado)
       ).then((value) async { await _consultarComandas(); });
     }
   }
